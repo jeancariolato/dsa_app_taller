@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'tela_detalhes_servico.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -163,63 +164,71 @@ class _HomePageState extends State<HomePage> {
                 itemCount: _vehicles.length,
                 itemBuilder: (context, index) {
                   final vehicle = _vehicles[index];
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const DetalhesServicoPage()),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  vehicle['id'],
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  vehicle['name'],
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Entry date: ${vehicle['entryDate']}',
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Column(
                             children: [
-                              Text(
-                                vehicle['id'],
-                                style: const TextStyle(
+                              const Text(
+                                'FOLDER',
+                                style: TextStyle(
                                   color: Colors.grey,
-                                  fontSize: 14,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                vehicle['name'],
+                                vehicle['folder'],
                                 style: const TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 32,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
                               ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Entry date: ${vehicle['entryDate']}',
-                                style: const TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 14,
-                                ),
-                              ),
                             ],
                           ),
-                        ),
-                        Column(
-                          children: [
-                            const Text(
-                              'FOLDER',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              vehicle['folder'],
-                              style: const TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
