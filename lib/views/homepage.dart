@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'tela_detalhes_servico.dart';
+import 'tela_inserir_atendimento.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -80,14 +81,24 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(8),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const InserirAtendimentoPage(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Icon(Icons.add, color: Colors.white, size: 24),
                     ),
-                    child: const Icon(Icons.add, color: Colors.white, size: 24),
                   ),
                 ],
               ),
@@ -168,7 +179,15 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const DetalhesServicoPage()),
+                        MaterialPageRoute(
+                          builder: (context) => DetalhesServicoPage(
+                            servico: {
+                              'placa': vehicle['placa'],
+                              'modelo': vehicle['modelo'],
+                              'status': vehicle['status'],
+                            },
+                          ),
+                        ),
                       );
                     },
                     child: Container(
